@@ -1,8 +1,7 @@
-// app/api/generate-workflow/route.js
+// @ts-nocheck
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Initialize Gemini with your free API key
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
 
 const systemPromptTemplate = `
@@ -109,14 +108,12 @@ export async function POST(request) {
     let generatedWorkflowJson = response.text();
     console.log("Raw AI response:", generatedWorkflowJson);
 
-    // Clean markdown
     generatedWorkflowJson = generatedWorkflowJson
       .replace(/```(?:json)?\s*/g, "")
       .replace(/```/g, "")
       .trim();
     console.log("Cleaned AI response:", generatedWorkflowJson);
 
-    // Parse and return
     const workflow = JSON.parse(generatedWorkflowJson);
     console.log("Parsed workflow:", workflow);
     return NextResponse.json(workflow);

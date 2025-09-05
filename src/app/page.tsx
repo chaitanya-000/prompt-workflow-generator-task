@@ -1,5 +1,5 @@
-// app/page.js
-"use client"; // This is required for a client-side React component
+// @ts-nocheck
+"use client";
 
 import { useState } from "react";
 
@@ -13,17 +13,16 @@ export default function Home() {
     setIsLoading(true);
 
     try {
-      // This calls the API route you created at /api/generate-workflow
       const response = await fetch("/api/generate-workflow", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ prompt: prompt }), // Send the prompt (even though the server doesn't use it yet)
+        body: JSON.stringify({ prompt: prompt }),
       });
 
       const workflow = await response.json();
-      setWorkflowJson(JSON.stringify(workflow, null, 2)); // Format it nicely for display
+      setWorkflowJson(JSON.stringify(workflow, null, 2));
     } catch (error) {
       console.error("Error generating workflow:", error);
       setWorkflowJson("Error: " + error.message);
