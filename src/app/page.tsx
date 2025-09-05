@@ -55,20 +55,32 @@ export default function Home() {
           style={{ width: "100%", marginBottom: "1rem" }}
           className="w-full border rounded p-4"
         />
-        <button type="submit" disabled={isLoading}>
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="bg-green-700 p-3 rounded-2xl text-white"
+        >
           {isLoading ? "Generating..." : "Generate Workflow"}
         </button>
       </form>
 
       {workflowJson && (
         <div>
-          <h2>Generated Workflow</h2>
+          <button className="bg-green-700 p-3 rounded-2xl text-white">
+            Generated Workflow
+          </button>
+
           <pre
             style={{ background: "#eee", padding: "1rem", overflow: "auto" }}
           >
             {workflowJson}
           </pre>
-          <button onClick={downloadJson}>Download JSON</button>
+          <button
+            className="bg-green-700 p-3 rounded-2xl text-white"
+            onClick={downloadJson}
+          >
+            Download JSON
+          </button>
         </div>
       )}
     </div>
